@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"></script>
+    <title>Tax Calculator</title>
+</head>
+
+<body class="bg-info">
+    <div class="container col-md-4 bg-success text-white mt-5">
+        <h2 class="text-center pt-3 pb-2">Tax Calculator</h2>
+        <form action="">
+            <div class="form-group">
+                <select name="option" id="option" class="form-control mb-2">
+                    <option value="def">----------------Select age group-------------</option>
+                    <option value="gen">Age less than 60</option>
+                    <option value="senior">Age greater than or equal to 60 and less than 80</option>
+                    <option value="super">Age greater than or equal to 80</option>
+                </select>
+                <input type="number" placeholder="Enter your income here" id="income" class="form-control mb-2">
+                <input type="button" value="Submit" onclick="getTax()" class="btn btn-secondary mb-2">
+            </div>
+        </form>
+        <p class="pb-1" id="result">Amount payable: <span id="tax"></span></p>
+    </div>
+
+    <script>
+        document.getElementById("result").style.display = 'none';
+        opt = document.getElementById("option");
+
+        function getTax() {
+            selOpt = opt.options[opt.selectedIndex].value;
+            let inc = document.getElementById("income").value;
+            let tax;
+            
+            if (((selOpt == "gen") && (inc <= 250000)) || ((selOpt == "senior") && (inc <= 300000)) || ((selOpt == "super") && (inc <= 500000))) {
+                tax = 0;
+            } else if (((selOpt == "gen") && (inc > 250000 && inc <= 500000)) || ((selOpt == "senior") && (inc > 300000 && inc <= 500000))) {
+                tax = (inc * 5) / 100;
+            } else if ((selOpt != "def") && (inc > 500000 && inc <= 1000000)) {
+                tax = (inc * 20) / 100;
+            } else if ((selOpt != "def") && (inc > 1000000 && inc <= 5000000)) {
+                tax = (inc * 30) / 100;
+            } else if ((selOpt != "def") && (inc > 5000000 && inc <= 10000000)) {
+                tax = (inc * 40) / 100;
+            } else if ((selOpt != "def") && (inc > 10000000)) {
+                tax = (inc * 45) / 100;
+            }
+            else{
+                alert("Select an option for age group!")
+            }
+            
+            if(selOpt != "def"){
+            document.getElementById("tax").innerHTML = tax;
+            document.getElementById("result").style.display = 'block';
+            }
+            else{
+                document.getElementById("result").style.display = 'none';
+            }
+        }
+    </script>
+</body>
+
+</html>
