@@ -26,7 +26,11 @@
                 <input type="button" value="Submit" onclick="getTax()" class="btn btn-secondary mb-2">
             </div>
         </form>
-        <p class="pb-1" id="result">Amount payable: <span id="tax"></span></p>
+        <!-- <p class="pb-1" id="result">Amount payable: <span id="tax"></span></p> -->
+    </div>
+
+    <div class="container col-md-4 bg-dark text-white mt-3">
+            <p class="pb-1" id="result">Amount payable: <span id="tax"></span></p>
     </div>
 
     <script>
@@ -54,7 +58,7 @@
             else{
                 alert("Select an option for age group!")
             }
-            
+
             if(selOpt != "def"){
             document.getElementById("tax").innerHTML = tax;
             document.getElementById("result").style.display = 'block';
